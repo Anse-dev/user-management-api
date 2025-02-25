@@ -2,6 +2,7 @@ import {
   Injectable,
   NotFoundException,
   ConflictException,
+  Inject,
 } from '@nestjs/common';
 import { UserRepositoryInterface } from '../../domain/ports/user.repository.interface';
 import { UserResponseDto } from '../dtos/user-response.dto';
@@ -13,7 +14,10 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UpdateUserUseCase implements UpdateUserUseCaseInterface {
-  constructor(private readonly userRepository: UserRepositoryInterface) {}
+  constructor(
+    @Inject('UserRepositoryInterface')
+    private readonly userRepository: UserRepositoryInterface,
+  ) {}
 
   async execute({ id, data }: UpdateUserInput): Promise<UserResponseDto> {
     // Vérifier si l'utilisateur existe

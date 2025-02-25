@@ -1,4 +1,4 @@
-import { Injectable, ConflictException } from '@nestjs/common';
+import { Injectable, ConflictException, Inject } from '@nestjs/common';
 import { UserRepositoryInterface } from '../../domain/ports/user.repository.interface';
 import { CreateUserDto } from '../dtos/create-user.dto';
 import { UserResponseDto } from '../dtos/user-response.dto';
@@ -7,7 +7,10 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class CreateUserUseCase implements CreateUserUseCaseInterface {
-  constructor(private readonly userRepository: UserRepositoryInterface) {}
+  constructor(
+    @Inject('UserRepositoryInterface')
+    private readonly userRepository: UserRepositoryInterface,
+  ) {}
 
   async execute(createUserDto: CreateUserDto): Promise<UserResponseDto> {
     // Vérifier si le login existe déjà
