@@ -65,21 +65,19 @@ démarrer l'application :
 
 ```bash
 # Lancer Docker Compose
-echo "🐳 Démarrage de la base de données PostgreSQL..."
 docker-compose up -d
 
 
 
 # Générer les migrations Prisma et appliquer
-echo "🔄 Génération et application des migrations Prisma..."
 npx prisma migrate dev --name init
 
 # Générer le client Prisma
-echo "🔧 Génération du client Prisma..."
+
 npx prisma generate
 
 # Démarrer l'application en mode développement
-echo "🚀 Démarrage de l'application NestJS..."
+
 pnpm start:dev
 ```
 
