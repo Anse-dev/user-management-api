@@ -65,7 +65,6 @@ describe('UserController', () => {
 
   describe('createUser', () => {
     it('should create a user successfully', async () => {
-      // Arrange
       const createUserDto: CreateUserDto = {
         login: 'testuser',
         password: 'password123',
@@ -98,16 +97,13 @@ describe('UserController', () => {
         .spyOn(createUserUseCase, 'execute')
         .mockResolvedValue(expectedResponse);
 
-      // Act
       const result = await userController.createUser(createUserDto);
 
-      // Assert
       expect(createUserUseCase.execute).toHaveBeenCalledWith(createUserDto);
       expect(result).toBe(expectedResponse);
     });
 
     it('should propagate exceptions from the use case', async () => {
-      // Arrange
       const createUserDto: CreateUserDto = {
         login: 'testuser',
         password: 'password123',
@@ -125,13 +121,10 @@ describe('UserController', () => {
         .spyOn(createUserUseCase, 'execute')
         .mockRejectedValue(new ConflictException('Login already exists'));
 
-      // Act & Assert
       await expect(userController.createUser(createUserDto)).rejects.toThrow(
         ConflictException,
       );
       expect(createUserUseCase.execute).toHaveBeenCalledWith(createUserDto);
     });
   });
-
-  // Autres tests pour les autres méthodes du contrôleur...
 });

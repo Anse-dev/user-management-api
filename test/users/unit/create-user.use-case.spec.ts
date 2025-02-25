@@ -35,7 +35,7 @@ describe('CreateUserUseCase', () => {
   });
 
   it('should create a user successfully', async () => {
-    // Arrange
+   
     const createUserDto = {
       login: 'testuser',
       password: 'password123',
@@ -62,10 +62,10 @@ describe('CreateUserUseCase', () => {
     userRepositoryMock.findByEmail.mockResolvedValue(null);
     userRepositoryMock.create.mockResolvedValue(createdUser);
 
-    // Act
+    
     const result = await createUserUseCase.execute(createUserDto);
 
-    // Assert
+    
     expect(userRepositoryMock.findByLogin).toHaveBeenCalledWith(
       createUserDto.login,
     );
@@ -86,7 +86,7 @@ describe('CreateUserUseCase', () => {
   });
 
   it('should throw ConflictException when login already exists', async () => {
-    // Arrange
+   
     const createUserDto = {
       login: 'existinguser',
       password: 'password123',
@@ -106,7 +106,7 @@ describe('CreateUserUseCase', () => {
       email: 'existing.email@example.com',
     });
 
-    // Act & Assert
+  
     await expect(createUserUseCase.execute(createUserDto)).rejects.toThrow(
       ConflictException,
     );
@@ -117,7 +117,7 @@ describe('CreateUserUseCase', () => {
   });
 
   it('should throw ConflictException when email already exists', async () => {
-    // Arrange
+   
     const createUserDto = {
       login: 'newuser',
       password: 'password123',
@@ -138,7 +138,7 @@ describe('CreateUserUseCase', () => {
       email: 'existing.email@example.com',
     });
 
-    // Act & Assert
+   
     await expect(createUserUseCase.execute(createUserDto)).rejects.toThrow(
       ConflictException,
     );

@@ -81,7 +81,7 @@ describe('UsersController (e2e)', () => {
       .expect((res) => {
         expect(res.body.firstName).toBe(updateData.firstName);
         expect(res.body.phone).toBe(updateData.phone);
-        expect(res.body.login).toBe(newUser.login); // Inchangé
+        expect(res.body.login).toBe(newUser.login); 
       });
 
     // Test GET all
@@ -103,16 +103,16 @@ describe('UsersController (e2e)', () => {
 
   it('/users (POST) - should validate input data', async () => {
     const invalidUser = {
-      login: '', // Champ requis vide
-      email: 'not-an-email', // Format d'email invalide
+      login: '', 
+      email: 'not-an-email', 
       lastName: 'Test',
-      // Champs requis manquants
+      
     };
 
     await request(app.getHttpServer())
       .post('/users')
       .send(invalidUser)
-      .expect(400); // Bad Request
+      .expect(400); 
   });
 
   it('/users (POST) - should prevent duplicate login', async () => {
@@ -136,11 +136,11 @@ describe('UsersController (e2e)', () => {
 
     // Tenter de créer un second utilisateur avec le même login
     const secondUser = {
-      login: 'duplicatelogintest', // Même login
+      login: 'duplicatelogintest', 
       password: 'anotherpassword',
       lastName: 'Second',
       firstName: 'User',
-      email: 'second.user@example.com', // Email différent
+      email: 'second.user@example.com', 
       address: '456 Other St',
       postalCode: '69001',
       city: 'Lyon',
@@ -150,6 +150,6 @@ describe('UsersController (e2e)', () => {
     await request(app.getHttpServer())
       .post('/users')
       .send(secondUser)
-      .expect(409); // Conflict
+      .expect(409); 
   });
 });

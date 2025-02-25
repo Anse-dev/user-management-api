@@ -33,7 +33,6 @@ describe('PrismaUserRepository', () => {
 
   describe('create', () => {
     it('should create a user', async () => {
-      // Arrange
       const userData = {
         login: 'testuser',
         password: 'hashedpassword',
@@ -56,10 +55,10 @@ describe('PrismaUserRepository', () => {
 
       prismaService.user.create.mockResolvedValue(createdUserData);
 
-      // Act
+      
       const result = await repository.create(userData);
 
-      // Assert
+     
       expect(prismaService.user.create).toHaveBeenCalledWith({
         data: userData,
       });
@@ -69,7 +68,6 @@ describe('PrismaUserRepository', () => {
 
   describe('findAll', () => {
     it('should return all users', async () => {
-      // Arrange
       const users = [
         {
           id: 'uuid-1',
@@ -105,14 +103,14 @@ describe('PrismaUserRepository', () => {
 
       prismaService.user.findMany.mockResolvedValue(users);
 
-      // Act
+      
       const result = await repository.findAll();
 
-      // Assert
+      
       expect(prismaService.user.findMany).toHaveBeenCalled();
       expect(result).toEqual(users);
     });
   });
 
-  // Autres tests pour les méthodes du repository...
+
 });

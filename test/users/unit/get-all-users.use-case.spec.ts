@@ -26,7 +26,6 @@ describe('GetAllUsersUseCase', () => {
   });
 
   it('should return all users without passwords', async () => {
-    // Arrange
     const users = [
       {
         id: 'uuid-1',
@@ -62,10 +61,10 @@ describe('GetAllUsersUseCase', () => {
 
     userRepositoryMock.findAll.mockResolvedValue(users);
 
-    // Act
+    
     const result = await getAllUsersUseCase.execute();
 
-    // Assert
+   
     expect(userRepositoryMock.findAll).toHaveBeenCalled();
     expect(result.length).toBe(2);
     expect(result[0]).not.toHaveProperty('password');
@@ -75,13 +74,12 @@ describe('GetAllUsersUseCase', () => {
   });
 
   it('should return an empty array when no users exist', async () => {
-    // Arrange
     userRepositoryMock.findAll.mockResolvedValue([]);
 
-    // Act
+    
     const result = await getAllUsersUseCase.execute();
 
-    // Assert
+    
     expect(userRepositoryMock.findAll).toHaveBeenCalled();
     expect(result).toEqual([]);
   });
