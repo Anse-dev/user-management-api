@@ -45,7 +45,7 @@ User {
 1. Cloner le repository
 
 ```bash
-git clone <repository-url>
+git clone git@github.com:Anse-dev/user-management-api.git
 cd user-management-api
 ```
 
@@ -82,6 +82,7 @@ npx prisma generate
 echo "🚀 Démarrage de l'application NestJS..."
 pnpm start:dev
 ```
+
 L'application sera accessible à l'adresse : http://localhost:3000
 
 ## Tests
